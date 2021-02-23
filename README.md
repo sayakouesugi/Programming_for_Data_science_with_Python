@@ -1,15 +1,18 @@
 ### Date created
-Include the date you created this project and README file.
+2/24/2021
 
 ### Project Title
-Replace the Project Title
+Bikeshare Project
 
 ### Description
-Describe what your project is about and what it does
+Bicycle-sharing systems allow users to rent bicycles on a very short-term basis for a price. This will enable people to borrow a bike from point A and return it at point B, though they can also return it to the exact location if they'd like to just go for a ride. Regardless, each bike can serve several users per day. I will compare the system usage between three large cities: Chicago, New York City, and Washington, DC. 
 
 ### Files used
-Include the files used
+chicago.csv
+new_york_city.csv
+washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+This github link was useful for me to complete project
+https://github.com/Aritra96/bikeshare-project/blob/master/bikeshare.py 
 
