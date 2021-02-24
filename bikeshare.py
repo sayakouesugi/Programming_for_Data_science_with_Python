@@ -27,6 +27,11 @@ def get_filters(city, month, day):
         else:
             break
     MONTH_LIST = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
+
+    """ Made the List to output
+    specified data
+    """
+
     while True:
          print("January, Feburary, March, April, May, June or all?")
          month = input("Please Enter Month\n").lower()
@@ -35,7 +40,13 @@ def get_filters(city, month, day):
             continue
          else:
             break
+
     DAY_LIST = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+    """ Made the List to output
+    specified data
+    """
+
     while True:
          print("Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or all?")
          day = input("Please Enter day\n").lower()
