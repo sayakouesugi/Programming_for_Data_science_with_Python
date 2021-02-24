@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 
 
+#Bikeshare Project
+
 CITY_DATA = { 'chicago': 'chicago.csv', 'Chicago': 'chicago.csv',
              'New York City': 'new_york_city.csv', 'New york city': 'new_york_city.csv',
               'new york city': 'new_york_city.csv', 'washington': 'washington.csv',
@@ -194,8 +196,12 @@ def user_stats(df):
 
 
 def data(df):
-    """Display more specified data
-    after ask user"""
+
+    """
+    Display more specified data,
+    after ask user.
+    """
+
     raw_data = 0
     while True:
         answer = input("Do you want to see the raw data? Yes or No").lower()
