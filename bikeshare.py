@@ -228,6 +228,7 @@ def main():
 
         restart = input('\nDo you want to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
+            print("You can see all data always, Thanks")
             break
 
 
