@@ -5,7 +5,6 @@ import numpy as np
 
 #Bikeshare Project
 
-|
 CITY_DATA = { 'chicago': 'chicago.csv', 'Chicago': 'chicago.csv',
              'New York City': 'new_york_city.csv', 'New york city': 'new_york_city.csv',
               'new york city': 'new_york_city.csv', 'washington': 'washington.csv',
