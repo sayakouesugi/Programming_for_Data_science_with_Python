@@ -1,0 +1,96 @@
+/* Query1 -Which category of the movie is popular? */
+SELECT category.name AS category_name,
+       COUNT(*)      AS rental_count
+FROM   rental
+       JOIN inventory
+         ON rental.inventory_id = inventory.inventory_id
+       JOIN film
+         ON film.film_id = inventory.film_id
+       JOIN film_category
+         ON film.film_id = film_category.film_id
+       JOIN category
+         ON category.category_id = film_category.category_id
+WHERE  category.name IN( 'Animation', 'Children', 'Classics', 'Comedy',
+                         'Family', 'Music' )
+GROUP  BY 1
+ORDER  BY 2 DESC; 
+
+
+
+
+/* Query2 - Question2 Which movie do you recommend to children? */
+WITH t1 
+     AS (SELECT title, 
+                category.name, 
+                rental_duration, 
+                NTILE(4) 
+                  OVER ( 
+                    ORDER BY rental_duration) AS standard_quartile, 
+                COUNT(*)                      AS rental_count 
+         FROM   rental 
+                JOIN inventory 
+                  ON rental.inventory_id = inventory.inventory_id 
+                JOIN film 
+                  ON film.film_id = inventory.film_id 
+                JOIN film_category 
+                  ON film.film_id = film_category.film_id 
+                JOIN category 
+                  ON category.category_id = film_category.category_id 
+         WHERE  category.name IN ( 'Animation', 'Children', 'Classics', 'Comedy' 
+                                   , 
+                                   'Family', 'Music' ) 
+         GROUP  BY 1, 
+                   2, 
+                   3) 
+SELECT title, 
+       name, 
+       rental_count, 
+       standard_quartile 
+FROM   t1 
+WHERE  standard_quartile = 4 
+       AND rental_count >= 25 
+ORDER  BY rental_count DESC; 
+
+
+/* Query3 - Question3 (Set1) Provide a table with the family-friendly film category, each of the quartiles, and the corresponding count of movies within each combination of film category for each corresponding rental duration category. */
+SELECT sub.name,
+       sub.standard_quartile,
+       COUNT(sub.standard_quartile)
+FROM   (SELECT title,
+               category.name,
+               rental_duration,
+               NTILE(4)
+                 OVER (
+                   ORDER BY rental_duration) AS standard_quartile
+        FROM   film
+               JOIN film_category
+                 ON film.film_id = film_category.film_id
+               JOIN category
+                 ON category.category_id = film_category.category_id
+        WHERE  category.name IN( 'Animation', 'Children', 'Classics', 'Comedy',
+                                 'Family', 'Music' )) sub
+GROUP  BY 1,
+          2
+ORDER  BY 1,
+          2; 
+
+
+
+
+/* Query4 - Question4 (Set2) . Write a query that returns the store ID for the store, the year and month and the number of rental orders each store has fulfilled for that month. Your table should include a column for each of the following: year, month, store ID and count of rental orders fulfilled during that month. */
+SELECT DATE_PART('month', rental_date) AS rental_month, 
+       DATE_PART('year', rental_date)  AS rental_year, 
+       store.store_id, 
+       COUNT(*)                        count_rentals 
+FROM   rental 
+       JOIN staff 
+         ON rental.staff_id = staff.staff_id 
+       JOIN store 
+         ON staff.store_id = store.store_id 
+GROUP  BY 1, 
+          2, 
+          3 
+ORDER  BY 4 DESC; 
+
+
+
